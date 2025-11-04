@@ -50,7 +50,7 @@ const layout = (() => {
                 </tr>`;
 
 
-        noticeListContainer.innerHTML = text;
+            noticeListContainer.innerHTML = text;
         }
 
         const pagination = document.querySelector(".pagination.kok-pagination");
