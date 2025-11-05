@@ -31,7 +31,7 @@
                       on c.user_id = n.company_id
                  join tbl_request_intern r
                       on n.id = r.intern_notice_id
-                 join tbl_evaluation e
+                 left join tbl_evaluation e
                       on r.id = e.request_experience_id
         where r.member_id = #{id}
         order by created_datetime desc
@@ -46,7 +46,7 @@
                       on c.user_id = n.company_id
                  join tbl_request_intern r
                       on n.id = r.intern_notice_id
-                 join tbl_evaluation e
+                 left join tbl_evaluation e
                       on r.id = e.request_experience_id
         where r.member_id = #{id}
     </select>
