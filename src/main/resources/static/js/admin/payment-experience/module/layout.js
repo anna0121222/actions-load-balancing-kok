@@ -36,7 +36,7 @@ const layout = (() => {
                         <p>${payment.userName}</p>
                     </td>
                     <td class="td-id">
-                        <p>${payment.userEmail}</p>
+                        <p>${payment.userEmail ?? '-'}</p>
                     </td>
                     <td class="td-start">
                         <p>${payment.companyName}</p>
