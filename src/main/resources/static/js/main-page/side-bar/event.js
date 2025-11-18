@@ -390,3 +390,62 @@ chatSection.addEventListener("click", (e) => {
     chatSpan.style.setProperty("display", "flex", "important");
     chatContainer.style.setProperty("display", "flex", "important");
 });
+
+
+// 메시지 전송
+const inputTextarea = document.querySelector(".input-textarea");
+const sendButton = document.querySelector(".send-button");
+const sendContainer = document.querySelector(".send-container");
+text = ``;
+
+function sendTextContainer() {
+    message = inputTextarea.value;
+    inputTextarea.value = "";
+    text += `<div class="message">
+                <span class="message-wrapper">
+                    <span class="message-content">
+                        <span class="message-text">
+                            <span class="message-line">
+                                <span class="message-title">`;
+
+    text += message;
+
+    text += `
+                                </span>
+                            </span>
+                        </span>
+                        <span class="spacer"></span>
+                    </span>
+                </span>
+                <span class="spacer"></span>
+                <span class="spacer"></span>
+            </div>
+            <span class="spacer"></span>`;
+    sendContainer.innerHTML = text;
+}
+
+sendButton.addEventListener("click", (e) => {
+    sendTextContainer();
+});
+
+inputTextarea.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendTextContainer();
+    }
+});
+
+// 고객지원 상세창 - 채팅창 입력시 전송버튼 활성화
+inputTextarea.addEventListener("input", () => {
+    if (inputTextarea.value.length > 0) {
+        sendButton.classList.add("active");
+    } else if (inputTextarea.value.length === 0) {
+        sendButton.classList.remove("active");
+    }
+});
+
+
+
+
+
+

@@ -848,7 +848,7 @@
 }
 
 .chat-thread-wrapper {
-    margin-top: 15px !important;
+    margin-top: 22px !important;
     display: inline-block !important;
     width: 100% !important;
 }
@@ -951,6 +951,56 @@
     min-height: 1px;
 }
 
+/* 메시지 전송 */
+.send-container {
+    display: block !important;
+    clear: both !important;
+}
+
+.message {
+    margin-bottom: 14px !important;
+    float: inline-end !important;
+    clear: both !important;
+    position: relative !important;
+    display: block !important;
+}
+
+.message-wrapper {
+    float: inline-end !important;
+}
+
+.message-content {
+    float: inline-end !important;
+    position: relative !important;
+    cursor: default !important;
+}
+
+.message-text {
+    background: rgb(240, 242, 245) !important;
+    color: rgb(28, 41, 59) !important;
+    text-align: start !important;
+    padding: 8px 14px 9px !important;
+    display: block !important;
+    border-radius: 10px !important;
+    cursor: default !important;
+    transform: translateZ(0) !important;
+}
+
+.message-line {
+    user-select: text !important;
+    font-family: Crisp Noto Sans Regular, sans-serif !important;
+}
+
+.message-title {
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+    -webkit-hyphens: auto!important;
+    hyphens: auto !important;
+}
+
+
+
+
 /* 채팅 - 메시지 입력란 */
 .chat-input-area {
     display: flex !important;
@@ -1025,7 +1075,7 @@
     display: block !important;
 }
 
-.send-button {
+.send-button.active {
     visibility: unset !important;
     text-align: center !important;
     height: 33px;
