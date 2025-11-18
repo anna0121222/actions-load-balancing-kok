@@ -485,6 +485,7 @@
                                 <span class="customer-support-top-text">공지사항</span>
                             </span>
                         </div>
+                        <!--  창 닫기 버튼  -->
                         <span class="customer-support-top-close-wrap">
                             <span class="customer-support-top-close-button" role="button" tabindex="0">
                                 <span class="customer-support-top-close-icon"></span>
@@ -492,6 +493,75 @@
                         </span>
                     </div>
                 </div>
+
+                <!-- 채팅창 -->
+                <div class="chat-container">
+                    <div class="chat-layout">
+                        <div class="chat-wrapper">
+                            <div class="chat-dialog" id="chat-dialog" aria-live="polite" aria-atomic="false" tabindex="0" role="dialog">
+                                <div class="chat-scroll">
+                                    <div class="chat-thread-wrapper">
+                                        <div class="chat-thread" date-has-timestamp="false" tabindex="-1" aria-live="polite" aria-relevant="additions">
+                                            <div class="msg-operator">
+                                                <span class="msg-avatar">
+                                                    <img src="/images/member/kok.png">
+                                                    <span class="avatar-image"></span>
+                                                </span>
+                                                <span class="msg-author">콕 | KOK</span>
+                                                <span class="msg-bubble-wrap">
+                                                    <span class="msg-bubble">
+                                                        <span class="msg-bubble-inner">
+                                                            <span class="msg-text-wrap">
+                                                                <span class="msg-text">안녕하세요! 어떤 도움이 필요하신가요?</span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="spacer"></span>
+                                                    </span>
+                                                </span>
+
+                                                <span class="msg-bubble-wrap">
+                                                    <span class="msg-bubble">
+                                                        <span class="msg-bubble-inner">
+                                                            <span class="msg-text-wrap">
+                                                                <img src="/images/experience/loading.gif">
+                                                            </span>
+                                                        </span>
+                                                        <span class="spacer"></span>
+                                                    </span>
+                                                </span>
+
+                                                <span class="spacer"></span>
+                                                <span class="spacer"></span>
+                                            </div>
+                                            <span class="spacer"></span>
+                                        </div>
+                                        <div class="chat-separator"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="input-row">
+                            <form class="input-form" name="form_message" action="#" method="post">
+                                <textarea class="input-textarea" placeholder="메시지 작성..." aria-label="메시지 작성..." name="message" rows="1"
+                                          dir="auto" autocapitalize="off" autocomplete="off" aria-controls="cc-1fk5y" tab="0" tabindex="0"
+                                          style="overflow: hidden; overflow-wrap: break-word; height: 18px;"></textarea>
+                            </form>
+                            <div class="send-wrapper">
+                                <span class="send-button" aria-label="보내다" tabindex="0" role="button">
+                                    <img style="padding-top: 2px; padding-left: 6px; width: 35px; align-items: center;" src="../../static/images/main-page/plane.png">
+                                    <span class="send-icon">전송</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- 공지사항 목록 -->
                 <div class="customer-support-body-wrap1">
                     <div class="customer-support-body-wrap2">
                         <div class="customer-support-body-wrap3">

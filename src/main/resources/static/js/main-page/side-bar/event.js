@@ -364,3 +364,29 @@ scrollContainer.addEventListener("click", async (e) => {
 //
 //     await sideService.getSupportList(sideLayout.showSupport, page, keyword)
 // });
+
+
+// 고객지원 상세창 - 자주 묻는 질문 토글
+const supportSpan = document.querySelector(".customer-support-top-title-wrap");
+const chatSpan = document.querySelector(".customer-support-top-chat-title-wrap");
+chatSpan.style.setProperty("display", "none", "important");
+
+const supportContainer = document.querySelector(".customer-support-body-wrap1");
+const chatContainer = document.querySelector(".chat-container");
+chatContainer.style.setProperty("display", "none", "important");
+
+const supportSection = document.querySelector(".customer-support-center-wrap");
+const chatSection = document.querySelector(".customer-support-talk-wrap");
+
+supportSection.addEventListener("click", (e) => {
+    supportSpan.style.setProperty("display", "flex", "important");
+    supportContainer.style.setProperty("display", "flex", "important");
+    chatSpan.style.setProperty("display", "none", "important");
+    chatContainer.style.setProperty("display", "none", "important");
+});
+chatSection.addEventListener("click", (e) => {
+    supportSpan.style.setProperty("display", "none", "important");
+    supportContainer.style.setProperty("display", "none", "important");
+    chatSpan.style.setProperty("display", "flex", "important");
+    chatContainer.style.setProperty("display", "flex", "important");
+});
