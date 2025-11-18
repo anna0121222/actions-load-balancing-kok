@@ -800,7 +800,7 @@
     flex-direction: column !important;
     flex-grow: 1 !important;
     overflow: hidden !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
 }
 
 .chat-layout {
@@ -920,8 +920,8 @@
     cursor: default !important;
     transform: translateZ(0) !important;
     float: inline-start !important;
-    background-color: rgb(240, 240, 240) !important;
-    color: rgb(47, 47, 47) !important;
+    background-color: rgb(47, 47, 47) !important;
+    color: rgb(255, 255, 255) !important;
 }
 
 .msg-text-wrap {
@@ -931,6 +931,7 @@
 }
 
 .msg-text {
+    color: #FFFFFF;
     word-break: normal !important;
     overflow-wrap: anywhere !important;
     -webkit-hyphens: auto!important;
