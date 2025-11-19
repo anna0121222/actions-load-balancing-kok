@@ -436,8 +436,9 @@ inputTextarea.addEventListener("keydown", async (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         const message = sendTextContainer();
-        answerLoading.style.display = "block";
+        console.log(message);
 
+        answerLoading.style.display = "block";
         const supportResponse = await fetch(`/api/support/all`);
         const adminNoticeDTOList = await supportResponse.json();
 
