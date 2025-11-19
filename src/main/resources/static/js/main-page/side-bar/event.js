@@ -425,16 +425,49 @@ function sendTextContainer() {
                 <span class="spacer"></span>
             </div>`;
     chatting.innerHTML = text;
+    return message;
 }
 
 sendButton.addEventListener("click", (e) => {
     sendTextContainer();
 });
 
-inputTextarea.addEventListener("keydown", (e) => {
+inputTextarea.addEventListener("keydown", async (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
-        sendTextContainer();
+        const message = sendTextContainer();
+        answerLoading.style.display = "block";
+
+        const supportResponse = await fetch(`/api/support/all`);
+        const adminNoticeDTOList = await supportResponse.json();
+
+        input = document.querySelector(".input-textarea");
+        console.log(message)
+        const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
+        });
+        answerLoading.style.display = "none";
+
+        const result = await response.json();
+        console.log(result);
+        text += `
+        <span class="msg-bubble-wrap msg-answer">
+            <span class="msg-bubble">
+                <span class="msg-bubble-inner">
+                    <span class="msg-text-wrap">
+                        <span class="msg-text">${result.answer}</span>
+                    </span>
+                </span>
+                <span class="spacer"></span>
+            </span>
+        </span>
+    `;
+
+        chatting.innerHTML = text;
     }
 });
 
@@ -453,38 +486,6 @@ const answerLoading = document.querySelector(".loading-image");
 
 sendButton.addEventListener("click", async (e) => {
     text = ``;
-    answerLoading.style.display = "block";
 
-    const supportResponse = await fetch(`/api/support/all`);
-    const adminNoticeDTOList = await supportResponse.json();
-
-    input = document.querySelector(".input-textarea");
-    const message = input.value;
-    console.log(message)
-    const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
-    });
-    answerLoading.style.display = "none";
-
-    const result = await response.json();
-    console.log(result);
-    text += `
-        <span class="msg-bubble-wrap msg-answer">
-            <span class="msg-bubble">
-                <span class="msg-bubble-inner">
-                    <span class="msg-text-wrap">
-                        <span class="msg-text">${result.answer}</span>
-                    </span>
-                </span>
-                <span class="spacer"></span>
-            </span>
-        </span>
-    `;
-
-    chatting.innerHTML = text;
 });
 
