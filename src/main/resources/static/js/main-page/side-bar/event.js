@@ -455,7 +455,7 @@ sendButton.addEventListener("click", async (e) => {
     const adminNoticeDTOList = await supportResponse.json();
 
     const message = inputTextarea.value;
-    const response = await fetch(`http://localhost:8000/api/question-response`,{
+    const response = await fetch(`http://kok-ok.store/api/question-response`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
