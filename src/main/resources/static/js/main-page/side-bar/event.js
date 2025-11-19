@@ -461,7 +461,7 @@ sendButton.addEventListener("click", async (e) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
-    })
+    });
     answerLoading.style.display = "none";
 
     const result = await response.json();
