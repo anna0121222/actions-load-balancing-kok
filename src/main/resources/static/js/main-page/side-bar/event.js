@@ -465,14 +465,13 @@ sendButton.addEventListener("click", async (e) => {
     answerLoading.style.display = "none";
 
     const result = await response.json();
-    const answerText = result.response
     console.log(answerText)
     text = ``;
     text += `
         <span class="msg-bubble">
             <span class="msg-bubble-inner">
                 <span class="msg-text-wrap">
-                    <span class="msg-text">${answerText}</span>
+                    <span class="msg-text">${result}</span>
                 </span>
             </span>
             <span class="spacer"></span>
