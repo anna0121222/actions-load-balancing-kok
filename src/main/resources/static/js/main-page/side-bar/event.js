@@ -449,7 +449,7 @@ const answerContainer = document.querySelector(".msg-answer");
 const answerLoading = document.querySelector(".loading-image");
 
 sendButton.addEventListener("click", async (e) => {
-    // answerLoading.style.display = "block";
+    answerLoading.style.display = "block";
     // setTimeout(async () => {
     //     answerLoading.style.display = "none";
     // }, 1000);
@@ -466,6 +466,7 @@ sendButton.addEventListener("click", async (e) => {
         },
         body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
     })
+    answerLoading.style.display = "none";
     const result = await response.json();
     const answerText = result.response
     console.log(answerText)
