@@ -110,6 +110,13 @@ public class AdminServiceImpl implements AdminService {
         return adminNoticeCriteriaDTO;
     }
 
+//    공지 전체
+    @Override
+    public List<AdminNoticeDTO> getListAll() {
+        List<AdminNoticeDTO> adminNoticeDTO = adminNoticeDAO.noticeListAll();
+        return adminNoticeDTO;
+    }
+
 //    공지 수정
     @Override
     @CachePut(value = "adminNotice", key = "'adminNotice_' + #adminNoticeDTO.id")

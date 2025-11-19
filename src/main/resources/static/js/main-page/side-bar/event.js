@@ -444,8 +444,43 @@ inputTextarea.addEventListener("input", () => {
     }
 });
 
+// ai 응답
+const answerContainer = document.querySelector(".msg-answer");
+const answerLoading = document.querySelector(".loading-image");
+
+sendButton.addEventListener("click", async (e) => {
+    // answerLoading.style.display = "block";
+    // setTimeout(async () => {
+    //     answerLoading.style.display = "none";
+    // }, 1000);
+
+    const supportResponse = await fetch(`/api/support/all`);
+    const adminNoticeDTOList = await supportResponse.json();
 
 
+    const message = inputTextarea.value;
+    const response = await fetch(`http://localhost:8000/api/question-response`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
+    })
+    const result = await response.json();
+    const answerText = result.response
+    console.log(answerText)
+    text = ``;
+    text += `
+        <span class="msg-bubble">
+            <span class="msg-bubble-inner">
+                <span class="msg-text-wrap">
+                    <span class="msg-text">${answerText}</span>
+                </span>
+            </span>
+            <span class="spacer"></span>
+        </span>
+    `;
 
-
+    answerContainer.innerHTML = text;
+});
 

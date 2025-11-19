@@ -30,6 +30,10 @@ public class AdminNoticeDAO {
     public List<AdminNoticeDTO> selectAll (Criteria criteria) {
         return adminNoticeMapper.selectNoticeAll(criteria);
     }
+//    목록 전체
+    public List<AdminNoticeDTO> noticeListAll () {
+        return adminNoticeMapper.noticeAll();
+    }
 
 //    전체 개수
     public int countAll () {

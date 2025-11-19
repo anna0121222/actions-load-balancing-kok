@@ -4,6 +4,7 @@ import com.example.kok.domain.AdminNoticeVO;
 import com.example.kok.dto.*;
 import com.example.kok.util.Search;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AdminService {
@@ -22,6 +23,8 @@ public interface AdminService {
 
 //    공지 목록
     public AdminNoticeCriteriaDTO getList (int page);
+//    공지 전체
+    public List<AdminNoticeDTO> getListAll ();
 
 //    공지 수정
     public AdminNoticeDTO update (AdminNoticeDTO adminNoticeDTO);
