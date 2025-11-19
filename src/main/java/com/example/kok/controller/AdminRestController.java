@@ -58,8 +58,8 @@ public class AdminRestController implements AdminRestControllerDocs {
 //    공지 전체
     @GetMapping("support/all")
     public ResponseEntity<List<AdminNoticeDTO>> listAll(){
-        List<AdminNoticeDTO> adminNoticeDTO = adminService.getListAll();
-        return ResponseEntity.ok(adminNoticeDTO);
+        List<AdminNoticeDTO> adminNoticeDTOList = adminService.getListAll();
+        return ResponseEntity.ok(adminNoticeDTOList);
     }
 
 //    체험 목록

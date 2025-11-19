@@ -450,9 +450,9 @@ const answerLoading = document.querySelector(".loading-image");
 
 sendButton.addEventListener("click", async (e) => {
     answerLoading.style.display = "block";
-    // setTimeout(async () => {
-    //     answerLoading.style.display = "none";
-    // }, 1000);
+
+    const supportResponse = await fetch(`/api/support/all`);
+    const adminNoticeDTOList = await supportResponse.json();
 
     const message = inputTextarea.value;
     const response = await fetch(`http://localhost:8000/api/question-response`,{
@@ -463,6 +463,7 @@ sendButton.addEventListener("click", async (e) => {
         body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
     })
     answerLoading.style.display = "none";
+
     const result = await response.json();
     const answerText = result.response
     console.log(answerText)
