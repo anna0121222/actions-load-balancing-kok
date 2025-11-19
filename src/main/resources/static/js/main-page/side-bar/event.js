@@ -458,9 +458,10 @@ sendButton.addEventListener("click", async (e) => {
     const supportResponse = await fetch(`/api/support/all`);
     const adminNoticeDTOList = await supportResponse.json();
 
-    const message = inputTextarea.value;
+    input = document.querySelector(".input-textarea");
+    const message = input.value;
     console.log(message)
-    const response = await fetch(`https://refresh-pork-filters-residence.trycloudflare.com/api/question-response`,{
+    const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
