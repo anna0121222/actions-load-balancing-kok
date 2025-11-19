@@ -471,7 +471,7 @@ sendButton.addEventListener("click", async (e) => {
         <span class="msg-bubble">
             <span class="msg-bubble-inner">
                 <span class="msg-text-wrap">
-                    <span class="msg-text">${result}</span>
+                    <span class="msg-text">${result.answer}</span>
                 </span>
             </span>
             <span class="spacer"></span>
