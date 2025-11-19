@@ -454,10 +454,6 @@ sendButton.addEventListener("click", async (e) => {
     //     answerLoading.style.display = "none";
     // }, 1000);
 
-    const supportResponse = await fetch(`/api/support/all`);
-    const adminNoticeDTOList = await supportResponse.json();
-
-
     const message = inputTextarea.value;
     const response = await fetch(`http://localhost:8000/api/question-response`,{
         method: "POST",
