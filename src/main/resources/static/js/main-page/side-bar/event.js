@@ -395,33 +395,36 @@ chatSection.addEventListener("click", (e) => {
 // 메시지 전송
 const inputTextarea = document.querySelector(".input-textarea");
 const sendButton = document.querySelector(".send-button");
+const chatting = document.getElementById('chatting');
 const sendContainer = document.querySelector(".send-container");
 text = ``;
 
 function sendTextContainer() {
     message = inputTextarea.value;
     inputTextarea.value = "";
-    text += `<div class="message">
-                <span class="message-wrapper">
-                    <span class="message-content">
-                        <span class="message-text">
-                            <span class="message-line">
-                                <span class="message-title">`;
+    text += `<div class="send-container">
+                <div class="message">
+                    <span class="message-wrapper">
+                        <span class="message-content">
+                            <span class="message-text">
+                                <span class="message-line">
+                                    <span class="message-title">`;
 
     text += message;
 
     text += `
+                                    </span>
                                 </span>
                             </span>
+                            <span class="spacer"></span>
                         </span>
-                        <span class="spacer"></span>
                     </span>
-                </span>
+                    <span class="spacer"></span>
+                    <span class="spacer"></span>
+                </div>
                 <span class="spacer"></span>
-                <span class="spacer"></span>
-            </div>
-            <span class="spacer"></span>`;
-    sendContainer.innerHTML = text;
+            </div>`;
+    chatting.innerHTML = text;
 }
 
 sendButton.addEventListener("click", (e) => {
@@ -449,12 +452,14 @@ const answerContainer = document.querySelector(".msg-answer");
 const answerLoading = document.querySelector(".loading-image");
 
 sendButton.addEventListener("click", async (e) => {
+    text = ``;
     answerLoading.style.display = "block";
 
     const supportResponse = await fetch(`/api/support/all`);
     const adminNoticeDTOList = await supportResponse.json();
 
     const message = inputTextarea.value;
+    console.log(message)
     const response = await fetch(`https://refresh-pork-filters-residence.trycloudflare.com/api/question-response`,{
         method: "POST",
         headers: {
@@ -466,18 +471,19 @@ sendButton.addEventListener("click", async (e) => {
 
     const result = await response.json();
     console.log(result);
-    text = ``;
     text += `
-        <span class="msg-bubble">
-            <span class="msg-bubble-inner">
-                <span class="msg-text-wrap">
-                    <span class="msg-text">${result.answer}</span>
+        <span class="msg-bubble-wrap msg-answer">
+            <span class="msg-bubble">
+                <span class="msg-bubble-inner">
+                    <span class="msg-text-wrap">
+                        <span class="msg-text">${result.answer}</span>
+                    </span>
                 </span>
+                <span class="spacer"></span>
             </span>
-            <span class="spacer"></span>
         </span>
     `;
 
-    answerContainer.innerHTML = text;
+    chatting.innerHTML = text;
 });
 
