@@ -20,7 +20,7 @@ public interface AdminNoticeMapper {
 //    공지사항 목록
     public List<AdminNoticeDTO> selectNoticeAll (Criteria criteria);
 //    공지 전체
-    public List<AdminNoticeDTO> noticeAll ();
+    public List<AdminNoticeDTO> selectNoticeAllList ();
 
 //    전체 개수
     public int countNoticeAll ();

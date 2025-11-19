@@ -113,8 +113,8 @@ public class AdminServiceImpl implements AdminService {
 //    공지 전체
     @Override
     public List<AdminNoticeDTO> getListAll() {
-        List<AdminNoticeDTO> adminNoticeDTO = adminNoticeDAO.noticeListAll();
-        return adminNoticeDTO;
+        List<AdminNoticeDTO> adminNoticeDTOList = adminNoticeDAO.noticeListAll();
+        return adminNoticeDTOList;
     }
 
 //    공지 수정

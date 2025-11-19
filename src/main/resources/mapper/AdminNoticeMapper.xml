@@ -21,6 +21,12 @@
         limit #{count} offset #{offset}
     </select>
 
+    <select id="selectNoticeAllList">
+        select id, admin_notice_title, admin_notice_content, created_datetime, updated_datetime
+        from tbl_admin_notice
+        where notice_status = 'active'
+    </select>
+
     <select id="countNoticeAll">
         select count(*) from tbl_admin_notice
         where notice_status = 'active'

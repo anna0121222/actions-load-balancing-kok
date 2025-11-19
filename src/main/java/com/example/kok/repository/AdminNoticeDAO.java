@@ -32,7 +32,7 @@ public class AdminNoticeDAO {
     }
 //    목록 전체
     public List<AdminNoticeDTO> noticeListAll () {
-        return adminNoticeMapper.noticeAll();
+        return adminNoticeMapper.selectNoticeAllList();
     }
 
 //    전체 개수
