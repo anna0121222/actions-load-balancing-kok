@@ -376,9 +376,7 @@ inputTextarea.addEventListener("input", (e) => {
 });
 
 function sendTextContainer() {
-    if(inputTextarea.length < 1) {
-        return;
-    } else {
+    if(inputTextarea.length > 0) {
         message = inputTextarea.value;
         inputTextarea.value = "";
         text += `<div class="send-container">
