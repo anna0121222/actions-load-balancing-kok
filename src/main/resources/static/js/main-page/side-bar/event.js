@@ -469,7 +469,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
         const message = sendTextContainer();
         console.log(message);
 
-        if(message.length > 0 || message.trim() !== "") {
+        if(message.trim() !== "") {
             // ai 응답
             const supportResponse = await fetch(`/api/support/all`);
             const adminNoticeDTOList = await supportResponse.json();
@@ -484,6 +484,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
             });
             const result = await response.json();
             console.log(result);
+            windowScroll();
 
             const loadingImg = document.querySelector(".loading-image");
             if (loadingImg) {
