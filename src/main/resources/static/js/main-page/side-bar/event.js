@@ -357,10 +357,14 @@ const chatting = document.getElementById('chatting');
 text = ``;
 
 // 고객지원 상세창 - 채팅창 입력시 전송버튼 활성화
-inputTextarea.addEventListener("input", () => {
+inputTextarea.addEventListener("input", (e) => {
     if (inputTextarea.value.length > 0) {
         sendButton.classList.add("active");
     } else if (inputTextarea.value.length < 1) {
+        sendButton.classList.remove("active");
+    }
+
+    if (e.key === "Enter") {
         sendButton.classList.remove("active");
     }
 });
@@ -444,7 +448,6 @@ sendButton.addEventListener("click", async (e) => {
         `;
 
     chatting.innerHTML = text;
-
     sendButton.classList.remove("active");
     container.scrollTop = container.scrollHeight;
 });
@@ -498,12 +501,9 @@ inputTextarea.addEventListener("keydown", async (e) => {
         `;
 
         chatting.innerHTML = text;
-
         document.querySelector(".loading-image").remove();
-        sendButton.classList.remove("active");
+        container.scrollTop = container.scrollHeight;
     }
-
-    container.scrollTop = container.scrollHeight;
 });
 
 

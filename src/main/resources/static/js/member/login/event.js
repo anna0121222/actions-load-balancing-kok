@@ -18,9 +18,9 @@ closeOutline.addEventListener("click",(e)=>{
     location.href='/experience/list';
 })
 
-if(window.location.search.includes("fail")){
-    alert("입력하신 정보가 없습니다.")
-}
+// if(window.location.search.includes("fail")){
+//     alert("입력하신 정보가 없습니다.")
+// }
 
 function memberLogin() {
     inputContainer.classList.add('member');
@@ -34,6 +34,9 @@ function memberLogin() {
     joinMember.classList.add('show');
     joinCompany.classList.remove('show');
     checkRole.setAttribute("value","member")
+    if(window.location.search.includes("fail")){
+        alert("입력하신 정보가 없습니다.")
+    }
 }
 
 function companyLogin() {
@@ -48,6 +51,9 @@ function companyLogin() {
     joinMember.classList.remove('show');
     joinCompany.classList.add('show');
     checkRole.setAttribute("value","company")
+    if(window.location.search.includes("fail")){
+        alert("입력하신 정보가 없습니다.")
+    }
 }
 
 // 일반 로그인
