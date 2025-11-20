@@ -432,6 +432,7 @@ sendButton.addEventListener("click", async (e) => {
     });
     const result = await response.json();
     console.log(result);
+    windowScroll();
 
     const loadingImg = document.querySelector(".loading-image");
     if (loadingImg) {
