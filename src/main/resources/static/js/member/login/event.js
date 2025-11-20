@@ -22,8 +22,7 @@ if(window.location.search.includes("fail")){
     alert("입력하신 정보가 없습니다.")
 }
 
-// 일반 로그인
-generalMember.addEventListener("click", (e) => {
+function memberLogin() {
     inputContainer.classList.add('member');
     inputContainer.classList.remove('company');
     generalMember.classList.add('select-login-type');
@@ -35,10 +34,9 @@ generalMember.addEventListener("click", (e) => {
     joinMember.classList.add('show');
     joinCompany.classList.remove('show');
     checkRole.setAttribute("value","member")
-});
+}
 
-// 기업 로그인
-companyMember.addEventListener("click", (e) => {
+function companyLogin() {
     inputContainer.classList.remove('member');
     inputContainer.classList.add('company');
     generalMember.classList.remove('select-login-type');
@@ -50,6 +48,26 @@ companyMember.addEventListener("click", (e) => {
     joinMember.classList.remove('show');
     joinCompany.classList.add('show');
     checkRole.setAttribute("value","company")
+}
+
+// 일반 로그인
+generalMember.addEventListener("click", (e) => {
+    memberLogin();
+});
+generalMember.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+        memberLogin();
+    }
+});
+
+// 기업 로그인
+companyMember.addEventListener("click", (e) => {
+    companyLogin();
+});
+companyMember.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+        memberLogin();
+    }
 });
 
 
@@ -58,36 +76,6 @@ const emailInput = document.querySelector('.email-input');
 const passwordInput = document.querySelector('.password-input');
 const loginButton = document.querySelector('.login-button');
 
-emailInput.addEventListener("keyup", (e) => {
-    if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
-        loginButton.classList.remove('login-disabled');
-    } else if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
-        loginButton.classList.add('login-disabled');
-    }
-});
-
-passwordInput.addEventListener("keyup", (e) => {
-    if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
-        loginButton.classList.remove('login-disabled');
-    } else if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
-        loginButton.classList.add('login-disabled');
-    }
-});
-
-loginButton.addEventListener("click",async (e)=>{
-    const email = emailInput.value;
-    const password = passwordInput.value;
-    const role = checkRole.value;
-
-    const result = await memberService.login({userEmail:email,userPassword:password,userRole:role});
-
-        if(result.accessToken){
-            if(checkRole.value==='member'){location.href='/experience/list';}
-            else{location.href='/enterprise-console';}
-
-        }else{showLoginErrorToast();}
-
-});
 
 // 토스트 - 로그인 오류(이메일)
 const isValidEmail = (value) => {
@@ -104,7 +92,7 @@ function showLoginErrorToast() {
     }, 3000);
 }
 
-loginButton.addEventListener("click", (e) => {
+function errorAll() {
     // 이메일 또는 비밀번호가 비어 있을 때
     if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
         return;
@@ -138,7 +126,7 @@ loginButton.addEventListener("click", (e) => {
             toastEmail.classList.remove("show-red");
         });
 
-    // 비밀번호가 4자 미만일 때
+        // 비밀번호가 4자 미만일 때
     } else if (passwordInput.value.length < 4) {
         showLoginErrorToast();
 
@@ -154,8 +142,48 @@ loginButton.addEventListener("click", (e) => {
             toastPassword.classList.remove("show-red");
         });
     }
+}
+
+emailInput.addEventListener("keyup", (e) => {
+    if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
+        loginButton.classList.remove('login-disabled');
+    } else if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
+        loginButton.classList.add('login-disabled');
+    }
+
+    if (e.key === "Enter") {
+        errorAll();
+    }
+});
+
+passwordInput.addEventListener("keyup", (e) => {
+    if (emailInput.value.length > 0 && passwordInput.value.length > 0) {
+        loginButton.classList.remove('login-disabled');
+    } else if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
+        loginButton.classList.add('login-disabled');
+    }
+
+    if (e.key === "Enter") {
+        errorAll();
+    }
+});
+
+loginButton.addEventListener("click",async (e)=>{
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    const role = checkRole.value;
+
+    errorAll();
+
+    const result = await memberService.login({userEmail:email,userPassword:password,userRole:role});
+        if(result.accessToken){
+            if(checkRole.value==='member'){location.href='/experience/list';}
+            else{location.href='/enterprise-console';}
+
+        }else{showLoginErrorToast();}
 
 });
+
 // 카카오 로그인
 const kakaoLoginButton = document.getElementById("kakao-login");
 kakaoLoginButton.addEventListener("click", (e) => {
@@ -172,10 +200,4 @@ naverLoginButton.addEventListener("click", (e) => {
     }else{window.location.href = "/oauth2/authorization/naver";}
 });
 
-// 구글 로그인
-// const googleLoginButton = document.getElementById("google-login");
-// googleLoginButton.addEventListener("click", (e) => {
-//     if(window.innerWidth<1023){
-//         window.location.href = "/oauth2/authorization/google";
-//     }else{window.location.href = "/oauth2/authorization/google";}
-// });
+
