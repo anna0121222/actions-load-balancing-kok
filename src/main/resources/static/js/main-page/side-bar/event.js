@@ -475,7 +475,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
             const adminNoticeDTOList = await supportResponse.json();
 
             input = document.querySelector(".input-textarea");
-            const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
+            const response = await fetch(`https://greatest-liked-enb-trout.trycloudflare.com/api/question-response`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
