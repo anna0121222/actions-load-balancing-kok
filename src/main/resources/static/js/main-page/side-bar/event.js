@@ -376,7 +376,7 @@ inputTextarea.addEventListener("input", (e) => {
 });
 
 function sendTextContainer() {
-    if(inputTextarea.length > 1) {
+    if(inputTextarea.value > 0 || inputTextarea.value.trim() !== "") {
         message = inputTextarea.value;
         inputTextarea.value = "";
         text += `<div class="send-container">
@@ -469,7 +469,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
         const message = sendTextContainer();
         console.log(message);
 
-        if(message.value.length > 1) {
+        if(message.value.length > 0 || message.value.trim() !== "") {
             // ai 응답
             const supportResponse = await fetch(`/api/support/all`);
             const adminNoticeDTOList = await supportResponse.json();
