@@ -370,7 +370,7 @@ function inputEnter() {
 inputTextarea.addEventListener("input", (e) => {
     if (inputTextarea.value.length > 0) {
         sendButton.classList.add("active");
-    } else if (inputTextarea.value.length < 1) {
+    } else if (inputTextarea.value.length < 1 || inputTextarea.value === "") {
         sendButton.classList.remove("active");
     }
 });
@@ -471,50 +471,52 @@ inputTextarea.addEventListener("keydown", async (e) => {
         const message = sendTextContainer();
         console.log(message);
 
-        // ai 응답
-        const supportResponse = await fetch(`/api/support/all`);
-        const adminNoticeDTOList = await supportResponse.json();
+        if(message.value !== "") {
+            // ai 응답
+            const supportResponse = await fetch(`/api/support/all`);
+            const adminNoticeDTOList = await supportResponse.json();
 
-        input = document.querySelector(".input-textarea");
-        const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
-        });
-        const result = await response.json();
-        console.log(result);
+            input = document.querySelector(".input-textarea");
+            const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
+            });
+            const result = await response.json();
+            console.log(result);
 
-        const loadingImg = document.querySelector(".loading-image");
-        if (loadingImg) {
-            loadingImg.parentElement.remove();
-        }
-        // DOM에서 제거된 상태를 기준으로 text를 업데이트
-        text = chatting.innerHTML;
+            const loadingImg = document.querySelector(".loading-image");
+            if (loadingImg) {
+                loadingImg.parentElement.remove();
+            }
+            // DOM에서 제거된 상태를 기준으로 text를 업데이트
+            text = chatting.innerHTML;
 
-        text += `
-            <div class="msg-operator">
-                <span class="msg-avatar">
-                        <img alt="logo" src="/images/member/kok.png">
-                        <span class="avatar-image"></span>
-                    </span>
-                <span class="msg-author">콕 | KOK</span>
-                <span class="msg-bubble-wrap msg-answer">
-                    <span class="msg-bubble">
-                        <span class="msg-bubble-inner">
-                            <span class="msg-text-wrap">
-                                <span class="msg-text">${result.answer}</span>
-                            </span>
+            text += `
+                <div class="msg-operator">
+                    <span class="msg-avatar">
+                            <img alt="logo" src="/images/member/kok.png">
+                            <span class="avatar-image"></span>
                         </span>
-                        <span class="spacer"></span>
+                    <span class="msg-author">콕 | KOK</span>
+                    <span class="msg-bubble-wrap msg-answer">
+                        <span class="msg-bubble">
+                            <span class="msg-bubble-inner">
+                                <span class="msg-text-wrap">
+                                    <span class="msg-text">${result.answer}</span>
+                                </span>
+                            </span>
+                            <span class="spacer"></span>
+                        </span>
                     </span>
-                </span>
-            </div>
-        `;
-        chatting.innerHTML = text;
+                </div>
+            `;
+            chatting.innerHTML = text;
 
-        windowScroll();
+            windowScroll();
+        }
     }
 });
 
