@@ -214,8 +214,8 @@ const sideLayout = (()=>{
                                         <h3 onclick="" id="detail-main-title" class="detail-main-title">
                                             <span class="detail-main-title-text">${adminNoticeDTO.adminNoticeTitle}</span>
                                         </h3>
+                                        <br>
                                         <span class="detail-main-content-text">
-                                            <br>
                                             ${adminNoticeDTO.adminNoticeContent}
                                         </span>
                                         <span class="detail-main-content-space"></span>

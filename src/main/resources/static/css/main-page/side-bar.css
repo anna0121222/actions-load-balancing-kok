@@ -1143,6 +1143,14 @@
     font-family: Crisp Noto Sans Bold,sans-serif !important;
 }
 
+.detail-main-body-wrap {
+    overflow: scroll;
+}
+
+.detail-main-content-text {
+    white-space: pre-wrap;
+}
+
 
 .pc {
     display: block;
