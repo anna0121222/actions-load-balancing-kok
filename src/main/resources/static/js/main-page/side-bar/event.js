@@ -349,10 +349,10 @@ chatSection.addEventListener("click", (e) => {
 
 
 // 메시지 전송
-const container = document.querySelector(".chat-scroll");
+const container = document.querySelector(".chat-thread-wrapper");
 const answerLoading = document.querySelector(".loading-image");
 const inputTextarea = document.querySelector(".input-textarea");
-const sendButton = document.querySelector(".send-wrapper");
+const sendButton = document.querySelector(".send-button");
 const chatting = document.getElementById('chatting');
 text = ``;
 
@@ -413,10 +413,16 @@ sendButton.addEventListener("click", async (e) => {
         },
         body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
     });
-    document.querySelector(".loading-image").remove();
-
     const result = await response.json();
     console.log(result);
+
+    const loadingImg = document.querySelector(".loading-image");
+    if (loadingImg) {
+        loadingImg.parentElement.remove();  // <div>까지 제거 추천
+    }
+    // DOM에서 제거된 상태를 기준으로 text를 업데이트
+    text = chatting.innerHTML;
+
     text += `
             <div class="msg-operator">
                 <span class="msg-avatar">
@@ -438,8 +444,8 @@ sendButton.addEventListener("click", async (e) => {
         `;
 
     chatting.innerHTML = text;
-    sendButton.classList.remove("active");
 
+    sendButton.classList.remove("active");
     container.scrollTop = container.scrollHeight;
 });
 
@@ -461,10 +467,16 @@ inputTextarea.addEventListener("keydown", async (e) => {
             },
             body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
         });
-        document.querySelector(".loading-image").remove();
-
         const result = await response.json();
         console.log(result);
+
+        const loadingImg = document.querySelector(".loading-image");
+        if (loadingImg) {
+            loadingImg.parentElement.remove();  // <div>까지 제거 추천
+        }
+        // DOM에서 제거된 상태를 기준으로 text를 업데이트
+        text = chatting.innerHTML;
+
         text += `
             <div class="msg-operator">
                 <span class="msg-avatar">
@@ -486,6 +498,8 @@ inputTextarea.addEventListener("keydown", async (e) => {
         `;
 
         chatting.innerHTML = text;
+
+        document.querySelector(".loading-image").remove();
         sendButton.classList.remove("active");
     }
 
