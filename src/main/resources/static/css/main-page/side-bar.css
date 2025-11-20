@@ -859,7 +859,6 @@
 }
 
 .msg-operator {
-    margin-bottom: 22px !important;
     float: inline-start !important;
     clear: both !important;
     position: relative !important;
@@ -898,6 +897,8 @@
 
 .msg-bubble-wrap {
     float: inline-start !important;
+    max-width: 280px;
+    margin: 0 0 23px 0;
 }
 
 .msg-bubble {
@@ -967,6 +968,8 @@
 
 .message-wrapper {
     float: inline-end !important;
+    max-width: 280px;
+    margin: 0 0 25px 0;
 }
 
 .message-content {
@@ -1072,10 +1075,17 @@
     cursor: pointer;
     margin-block: 12px !important;
     margin-inline: 12px 0 !important;
-    display: block !important;
+    display: none;
 }
 
-.send-button.active {
+.send-wrapper.active {
+    cursor: pointer;
+    margin-block: 12px !important;
+    margin-inline: 12px 0 !important;
+    display: block;
+}
+
+.send-button {
     visibility: unset !important;
     text-align: center !important;
     height: 33px;

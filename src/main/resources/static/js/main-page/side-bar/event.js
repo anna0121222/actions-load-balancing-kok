@@ -394,7 +394,7 @@ chatSection.addEventListener("click", (e) => {
 
 // 메시지 전송
 const inputTextarea = document.querySelector(".input-textarea");
-const sendButton = document.querySelector(".send-button");
+const sendButton = document.querySelector(".send-wrapper");
 const chatting = document.getElementById('chatting');
 const sendContainer = document.querySelector(".send-container");
 text = ``;
@@ -443,7 +443,6 @@ inputTextarea.addEventListener("keydown", async (e) => {
         const adminNoticeDTOList = await supportResponse.json();
 
         input = document.querySelector(".input-textarea");
-        console.log(message)
         const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
             method: "POST",
             headers: {
@@ -456,19 +455,27 @@ inputTextarea.addEventListener("keydown", async (e) => {
         const result = await response.json();
         console.log(result);
         text += `
-        <span class="msg-bubble-wrap msg-answer">
-            <span class="msg-bubble">
-                <span class="msg-bubble-inner">
-                    <span class="msg-text-wrap">
-                        <span class="msg-text">${result.answer}</span>
+            <div class="msg-operator">
+                <span class="msg-avatar">
+                        <img src="/images/member/kok.png">
+                        <span class="avatar-image"></span>
+                    </span>
+                <span class="msg-author">콕 | KOK</span>
+                <span class="msg-bubble-wrap msg-answer">
+                    <span class="msg-bubble">
+                        <span class="msg-bubble-inner">
+                            <span class="msg-text-wrap">
+                                <span class="msg-text">${result.answer}</span>
+                            </span>
+                        </span>
+                        <span class="spacer"></span>
                     </span>
                 </span>
-                <span class="spacer"></span>
-            </span>
-        </span>
-    `;
+            </div>
+        `;
 
         chatting.innerHTML = text;
+        sendButton.classList.remove("active");
     }
 });
 
@@ -476,7 +483,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
 inputTextarea.addEventListener("input", () => {
     if (inputTextarea.value.length > 0) {
         sendButton.classList.add("active");
-    } else if (inputTextarea.value.length === 0) {
+    } else if (inputTextarea.value.length < 1) {
         sendButton.classList.remove("active");
     }
 });
