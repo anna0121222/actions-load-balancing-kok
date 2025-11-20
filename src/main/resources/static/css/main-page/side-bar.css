@@ -898,7 +898,7 @@
 .msg-bubble-wrap {
     float: inline-start !important;
     max-width: 280px;
-    margin: 0 0 23px 0;
+    margin: 0 0 40px 0;
 }
 
 .msg-bubble {
@@ -968,7 +968,7 @@
 .message-wrapper {
     float: inline-end !important;
     max-width: 280px;
-    margin: 0 0 25px 0;
+    margin: 0 0 22px 0;
 }
 
 .message-content {

@@ -349,6 +349,7 @@ chatSection.addEventListener("click", (e) => {
 
 
 // 메시지 전송
+const container = document.querySelector(".chat-scroll");
 const answerLoading = document.querySelector(".loading-image");
 const inputTextarea = document.querySelector(".input-textarea");
 const sendButton = document.querySelector(".send-wrapper");
@@ -388,7 +389,11 @@ function sendTextContainer() {
                     <span class="spacer"></span>
                 </div>
                 <span class="spacer"></span>
-            </div>`;
+            </div>
+            <div>
+                <img alt="chat-loading" class="loading-image" style="width: 108px; display: none;" src="/images/experience/loading.gif">
+            </div>
+    `;
     chatting.innerHTML = text;
     return message;
 }
@@ -397,7 +402,6 @@ sendButton.addEventListener("click", async (e) => {
     sendTextContainer();
 
     // ai 응답
-    answerLoading.style.display = "block";
     const supportResponse = await fetch(`/api/support/all`);
     const adminNoticeDTOList = await supportResponse.json();
 
@@ -409,7 +413,7 @@ sendButton.addEventListener("click", async (e) => {
         },
         body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
     });
-    answerLoading.style.display = "none";
+    document.querySelector(".loading-image").remove();
 
     const result = await response.json();
     console.log(result);
@@ -435,6 +439,8 @@ sendButton.addEventListener("click", async (e) => {
 
     chatting.innerHTML = text;
     sendButton.classList.remove("active");
+
+    container.scrollTop = container.scrollHeight;
 });
 
 inputTextarea.addEventListener("keydown", async (e) => {
@@ -444,7 +450,6 @@ inputTextarea.addEventListener("keydown", async (e) => {
         console.log(message);
 
         // ai 응답
-        answerLoading.style.display = "block";
         const supportResponse = await fetch(`/api/support/all`);
         const adminNoticeDTOList = await supportResponse.json();
 
@@ -456,7 +461,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
             },
             body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
         });
-        answerLoading.style.display = "none";
+        document.querySelector(".loading-image").remove();
 
         const result = await response.json();
         console.log(result);
@@ -483,6 +488,8 @@ inputTextarea.addEventListener("keydown", async (e) => {
         chatting.innerHTML = text;
         sendButton.classList.remove("active");
     }
+
+    container.scrollTop = container.scrollHeight;
 });
 
 
