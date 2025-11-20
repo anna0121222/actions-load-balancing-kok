@@ -469,7 +469,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
         const message = sendTextContainer();
         console.log(message);
 
-        if(message.value.trim() !== "") {
+        if(message.length > 0 || message.trim() !== "") {
             // ai 응답
             const supportResponse = await fetch(`/api/support/all`);
             const adminNoticeDTOList = await supportResponse.json();
