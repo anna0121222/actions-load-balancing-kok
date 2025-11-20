@@ -391,7 +391,7 @@ function sendTextContainer() {
                 <span class="spacer"></span>
             </div>
             <div>
-                <img alt="chat-loading" class="loading-image" style="width: 108px; display: none;" src="/images/experience/loading.gif">
+                <img alt="chat-loading" class="loading-image" style="width: 108px; display: block;" src="/images/experience/loading.gif">
             </div>
     `;
     chatting.innerHTML = text;

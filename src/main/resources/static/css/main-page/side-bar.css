@@ -998,6 +998,7 @@
     overflow-wrap: anywhere !important;
     -webkit-hyphens: auto!important;
     hyphens: auto !important;
+    font-size: 12px;
 }
 
 
