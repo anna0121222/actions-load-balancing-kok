@@ -214,10 +214,7 @@ const sideLayout = (()=>{
                                         <h3 onclick="" id="detail-main-title" class="detail-main-title">
                                             <span class="detail-main-title-text">${adminNoticeDTO.adminNoticeTitle}</span>
                                         </h3>
-                                        <br>
-                                        <span class="detail-main-content-text">
-                                            ${adminNoticeDTO.adminNoticeContent}
-                                        </span>
+                                        <span class="detail-main-content-text">${adminNoticeDTO.adminNoticeContent}</span>
                                         <span class="detail-main-content-space"></span>
                                         <p class="detail-main-update-date">업데이트 날짜: ${adminNoticeDTO.updatedDateTime}</p>
                                     </div>
