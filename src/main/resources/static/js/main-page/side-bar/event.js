@@ -362,10 +362,8 @@ function windowScroll() {
 }
 
 function inputEnter() {
-    if (e.key === "Enter") {
-        const sendButton = document.querySelector(".send-button");
-        sendButton.classList.remove("active");
-    }
+    const sendButton = document.querySelector(".send-button");
+    sendButton.classList.remove("active");
 }
 
 // 고객지원 상세창 - 채팅창 입력시 전송버튼 활성화
@@ -378,9 +376,12 @@ inputTextarea.addEventListener("input", (e) => {
 });
 
 function sendTextContainer() {
-    message = inputTextarea.value;
-    inputTextarea.value = "";
-    text += `<div class="send-container">
+    if(inputTextarea.length < 1) {
+        return;
+    } else {
+        message = inputTextarea.value;
+        inputTextarea.value = "";
+        text += `<div class="send-container">
                 <div class="message">
                     <span class="message-wrapper">
                         <span class="message-content">
@@ -388,9 +389,9 @@ function sendTextContainer() {
                                 <span class="message-line">
                                     <span class="message-title">`;
 
-    text += message;
+        text += message;
 
-    text += `
+        text += `
                                     </span>
                                 </span>
                             </span>
@@ -405,9 +406,13 @@ function sendTextContainer() {
             <div>
                 <img alt="chat-loading" class="loading-image" style="width: 108px; display: block;" src="/images/experience/loading.gif">
             </div>
-    `;
-    chatting.innerHTML = text;
-    return message;
+        `;
+        chatting.innerHTML = text;
+        inputEnter();
+        windowScroll();
+
+        return message;
+    }
 }
 
 sendButton.addEventListener("click", async (e) => {
@@ -456,7 +461,6 @@ sendButton.addEventListener("click", async (e) => {
         `;
     chatting.innerHTML = text;
 
-    inputEnter();
     windowScroll();
 });
 
@@ -509,7 +513,6 @@ inputTextarea.addEventListener("keydown", async (e) => {
         `;
         chatting.innerHTML = text;
 
-        inputEnter();
         windowScroll();
     }
 });
