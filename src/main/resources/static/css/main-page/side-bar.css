@@ -959,7 +959,6 @@
 }
 
 .message {
-    margin-bottom: 14px !important;
     float: inline-end !important;
     clear: both !important;
     position: relative !important;
@@ -1075,17 +1074,14 @@
     cursor: pointer;
     margin-block: 12px !important;
     margin-inline: 12px 0 !important;
-    display: none;
-}
-
-.send-wrapper.active {
-    cursor: pointer;
-    margin-block: 12px !important;
-    margin-inline: 12px 0 !important;
     display: block;
 }
 
 .send-button {
+    display: none;
+}
+
+.send-button.active {
     visibility: unset !important;
     text-align: center !important;
     height: 33px;

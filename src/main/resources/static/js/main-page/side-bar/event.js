@@ -286,38 +286,6 @@ scrollWrap.addEventListener("scroll", async (e) => {
     }
 });
 
-// 고객지원 상세창
-// const faqItems = document.querySelectorAll(".customer-support-list-section");
-// const detailModal = document.getElementById("crisp-chatbox-chat-detail");
-// const detailCloseBtn = document.querySelector(".detail-top-close-button");
-// const detailBackBtn = document.querySelector(".detail-back-wrap");
-// const supportTab = document.querySelector(".detail-top-title-section2");
-//
-// faqItems.forEach((item) => {
-//     item.addEventListener("click", () => {
-//         if (detailModal) detailModal.classList.add("active");
-//     });
-// });
-//
-// if (detailCloseBtn) {
-//     detailCloseBtn.addEventListener("click", () => {
-//         if (detailModal) detailModal.classList.remove("active");
-//         if (supportModal) supportModal.classList.remove("active");
-//     });
-// }
-//
-// if (detailBackBtn) {
-//     detailBackBtn.addEventListener("click", () => {
-//         if (detailModal) detailModal.classList.remove("active");
-//     });
-// }
-//
-// if (supportTab) {
-//     supportTab.addEventListener("click", () => {
-//         if (detailModal) detailModal.classList.remove("active");
-//     });
-// }
-
 // 고객지원 상세
 scrollContainer.addEventListener("click", async (e) => {
     const detailModal = document.getElementById("crisp-chatbox-chat-detail");
@@ -354,18 +322,6 @@ scrollContainer.addEventListener("click", async (e) => {
     }
 });
 
-// 고객지원 검색창
-// const supportSearch = document.querySelector("form[name=form_helpdesk]");
-// const searchInput = document.querySelector("input[name=helpdesk_search]");
-// supportSearch.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-//     const page = 1;
-//     const keyword = searchInput.value;
-//
-//     await sideService.getSupportList(sideLayout.showSupport, page, keyword)
-// });
-
-
 // 고객지원 상세창 - 자주 묻는 질문 토글
 const supportSpan = document.querySelector(".customer-support-top-title-wrap");
 const chatSpan = document.querySelector(".customer-support-top-chat-title-wrap");
@@ -393,11 +349,20 @@ chatSection.addEventListener("click", (e) => {
 
 
 // 메시지 전송
+const answerLoading = document.querySelector(".loading-image");
 const inputTextarea = document.querySelector(".input-textarea");
 const sendButton = document.querySelector(".send-wrapper");
 const chatting = document.getElementById('chatting');
-const sendContainer = document.querySelector(".send-container");
 text = ``;
+
+// 고객지원 상세창 - 채팅창 입력시 전송버튼 활성화
+inputTextarea.addEventListener("input", () => {
+    if (inputTextarea.value.length > 0) {
+        sendButton.classList.add("active");
+    } else if (inputTextarea.value.length < 1) {
+        sendButton.classList.remove("active");
+    }
+});
 
 function sendTextContainer() {
     message = inputTextarea.value;
@@ -428,8 +393,48 @@ function sendTextContainer() {
     return message;
 }
 
-sendButton.addEventListener("click", (e) => {
+sendButton.addEventListener("click", async (e) => {
     sendTextContainer();
+
+    // ai 응답
+    answerLoading.style.display = "block";
+    const supportResponse = await fetch(`/api/support/all`);
+    const adminNoticeDTOList = await supportResponse.json();
+
+    input = document.querySelector(".input-textarea");
+    const response = await fetch(`https://troops-serving-director-ebooks.trycloudflare.com/api/question-response`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ question: message, noticeList: adminNoticeDTOList })
+    });
+    answerLoading.style.display = "none";
+
+    const result = await response.json();
+    console.log(result);
+    text += `
+            <div class="msg-operator">
+                <span class="msg-avatar">
+                        <img alt="logo" src="/images/member/kok.png">
+                        <span class="avatar-image"></span>
+                    </span>
+                <span class="msg-author">콕 | KOK</span>
+                <span class="msg-bubble-wrap msg-answer">
+                    <span class="msg-bubble">
+                        <span class="msg-bubble-inner">
+                            <span class="msg-text-wrap">
+                                <span class="msg-text">${result.answer}</span>
+                            </span>
+                        </span>
+                        <span class="spacer"></span>
+                    </span>
+                </span>
+            </div>
+        `;
+
+    chatting.innerHTML = text;
+    sendButton.classList.remove("active");
 });
 
 inputTextarea.addEventListener("keydown", async (e) => {
@@ -438,6 +443,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
         const message = sendTextContainer();
         console.log(message);
 
+        // ai 응답
         answerLoading.style.display = "block";
         const supportResponse = await fetch(`/api/support/all`);
         const adminNoticeDTOList = await supportResponse.json();
@@ -457,7 +463,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
         text += `
             <div class="msg-operator">
                 <span class="msg-avatar">
-                        <img src="/images/member/kok.png">
+                        <img alt="logo" src="/images/member/kok.png">
                         <span class="avatar-image"></span>
                     </span>
                 <span class="msg-author">콕 | KOK</span>
@@ -479,21 +485,5 @@ inputTextarea.addEventListener("keydown", async (e) => {
     }
 });
 
-// 고객지원 상세창 - 채팅창 입력시 전송버튼 활성화
-inputTextarea.addEventListener("input", () => {
-    if (inputTextarea.value.length > 0) {
-        sendButton.classList.add("active");
-    } else if (inputTextarea.value.length < 1) {
-        sendButton.classList.remove("active");
-    }
-});
 
-// ai 응답
-const answerContainer = document.querySelector(".msg-answer");
-const answerLoading = document.querySelector(".loading-image");
-
-sendButton.addEventListener("click", async (e) => {
-    text = ``;
-
-});
 
