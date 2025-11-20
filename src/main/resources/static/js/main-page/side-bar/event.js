@@ -422,7 +422,7 @@ sendButton.addEventListener("click", async (e) => {
 
     const loadingImg = document.querySelector(".loading-image");
     if (loadingImg) {
-        loadingImg.parentElement.remove();  // <div>까지 제거 추천
+        loadingImg.parentElement.remove();
     }
     // DOM에서 제거된 상태를 기준으로 text를 업데이트
     text = chatting.innerHTML;
@@ -446,9 +446,11 @@ sendButton.addEventListener("click", async (e) => {
                 </span>
             </div>
         `;
-
     chatting.innerHTML = text;
+
+    const sendButton = document.querySelector(".send-button");
     sendButton.classList.remove("active");
+    const container = document.querySelector(".chat-thread-wrapper");
     container.scrollTop = container.scrollHeight;
 });
 
@@ -475,7 +477,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
 
         const loadingImg = document.querySelector(".loading-image");
         if (loadingImg) {
-            loadingImg.parentElement.remove();  // <div>까지 제거 추천
+            loadingImg.parentElement.remove();
         }
         // DOM에서 제거된 상태를 기준으로 text를 업데이트
         text = chatting.innerHTML;
@@ -499,9 +501,11 @@ inputTextarea.addEventListener("keydown", async (e) => {
                 </span>
             </div>
         `;
-
         chatting.innerHTML = text;
-        document.querySelector(".loading-image").remove();
+
+        const sendButton = document.querySelector(".send-button");
+        sendButton.classList.remove("active");
+        const container = document.querySelector(".chat-thread-wrapper");
         container.scrollTop = container.scrollHeight;
     }
 });

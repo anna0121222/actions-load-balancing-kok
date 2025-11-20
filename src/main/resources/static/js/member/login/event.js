@@ -18,9 +18,10 @@ closeOutline.addEventListener("click",(e)=>{
     location.href='/experience/list';
 })
 
-// if(window.location.search.includes("fail")){
-//     alert("입력하신 정보가 없습니다.")
-// }
+if(window.location.search.includes("fail")){
+    e.preventDefault();
+    alert("입력하신 정보가 없습니다.");
+}
 
 function memberLogin() {
     inputContainer.classList.add('member');
@@ -34,9 +35,6 @@ function memberLogin() {
     joinMember.classList.add('show');
     joinCompany.classList.remove('show');
     checkRole.setAttribute("value","member")
-    if(window.location.search.includes("fail")){
-        alert("입력하신 정보가 없습니다.")
-    }
 }
 
 function companyLogin() {
@@ -51,9 +49,6 @@ function companyLogin() {
     joinMember.classList.remove('show');
     joinCompany.classList.add('show');
     checkRole.setAttribute("value","company")
-    if(window.location.search.includes("fail")){
-        alert("입력하신 정보가 없습니다.")
-    }
 }
 
 // 일반 로그인
@@ -92,6 +87,7 @@ const toastEmail = document.querySelector("#toast-email");
 const toastPassword = document.querySelector("#toast-password");
 // 로그인 오류 토스트
 function showLoginErrorToast() {
+    e.preventDefault();
     toastLogin.classList.add("show");
     setTimeout(() => {
         toastLogin.classList.remove("show");
@@ -101,11 +97,13 @@ function showLoginErrorToast() {
 function errorAll() {
     // 이메일 또는 비밀번호가 비어 있을 때
     if (emailInput.value.length === 0 || passwordInput.value.length === 0) {
+        e.preventDefault();
         return;
     }
 
     // 이메일 형식&비밀번호 길이 검사
     if (!isValidEmail(emailInput.value) && passwordInput.value.length < 4) {
+        e.preventDefault();
         showLoginErrorToast();
 
         // 이메일 오류 토스트 표시
@@ -118,6 +116,7 @@ function errorAll() {
         });
 
     } else if (!isValidEmail(emailInput.value) && passwordInput.value.length >= 4) {
+        e.preventDefault();
         showLoginErrorToast();
 
         // 이메일 오류 토스트 표시
@@ -134,6 +133,7 @@ function errorAll() {
 
         // 비밀번호가 4자 미만일 때
     } else if (passwordInput.value.length < 4) {
+        e.preventDefault();
         showLoginErrorToast();
 
         // 비밀번호 오류 토스트 표시
