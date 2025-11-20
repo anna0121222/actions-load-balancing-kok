@@ -356,15 +356,23 @@ const sendButton = document.querySelector(".send-button");
 const chatting = document.getElementById('chatting');
 text = ``;
 
+function windowScroll() {
+    const container = document.querySelector(".chat-scroll");
+    container.scrollTop = container.scrollHeight;
+}
+
+function inputEnter() {
+    if (e.key === "Enter") {
+        const sendButton = document.querySelector(".send-button");
+        sendButton.classList.remove("active");
+    }
+}
+
 // 고객지원 상세창 - 채팅창 입력시 전송버튼 활성화
 inputTextarea.addEventListener("input", (e) => {
     if (inputTextarea.value.length > 0) {
         sendButton.classList.add("active");
     } else if (inputTextarea.value.length < 1) {
-        sendButton.classList.remove("active");
-    }
-
-    if (e.key === "Enter") {
         sendButton.classList.remove("active");
     }
 });
@@ -448,10 +456,8 @@ sendButton.addEventListener("click", async (e) => {
         `;
     chatting.innerHTML = text;
 
-    const sendButton = document.querySelector(".send-button");
-    sendButton.classList.remove("active");
-    const container = document.querySelector(".chat-thread-wrapper");
-    container.scrollTop = container.scrollHeight;
+    inputEnter();
+    windowScroll();
 });
 
 inputTextarea.addEventListener("keydown", async (e) => {
@@ -503,10 +509,8 @@ inputTextarea.addEventListener("keydown", async (e) => {
         `;
         chatting.innerHTML = text;
 
-        const sendButton = document.querySelector(".send-button");
-        sendButton.classList.remove("active");
-        const container = document.querySelector(".chat-thread-wrapper");
-        container.scrollTop = container.scrollHeight;
+        inputEnter();
+        windowScroll();
     }
 });
 
