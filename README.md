@@ -1,5 +1,5 @@
 # 콕 KOK | http://kok-ok.store/member/login
-#### 접속 가능 시간 10:00(AM) ~ 6:00(PM)
+#### 접속 가능 시간 10:00(AM) ~ 5:00(PM)
 일반 회원 ID/PW: user01@gmail.com/1234 <br>
 기업 회원 ID/PW: kok01@gmail.com/1234 <br><br>
 
