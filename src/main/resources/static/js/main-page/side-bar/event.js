@@ -470,7 +470,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
         console.log(message);
 
         if(message.trim() !== "") {
-            // ai 응답
+            // ai 응답 설정
             const supportResponse = await fetch(`/api/support/all`);
             const adminNoticeDTOList = await supportResponse.json();
 
@@ -513,7 +513,7 @@ inputTextarea.addEventListener("keydown", async (e) => {
                 </div>
             `;
             chatting.innerHTML = text;
-
+            
             windowScroll();
         }
     }
